@@ -3,10 +3,12 @@ package ru.itmentor.spring.boot_security.demo.services;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import ru.itmentor.spring.boot_security.demo.models.Role;
 import ru.itmentor.spring.boot_security.demo.models.User;
 
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService extends UserDetailsService {
     void add(User user);
@@ -21,6 +23,6 @@ public interface UserService extends UserDetailsService {
 
     User findByUsername(String username);
 
-    @Override
-    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+    Set<Role> getSetOfRoles(List<String> id);
+
 }

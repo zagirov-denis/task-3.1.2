@@ -22,7 +22,11 @@
 
     <label >Email</label>
     <input type="text" th:field="*{email}" placeholder="Email"><br>
-
+    <p>
+        <label>Roles:
+            <input type="checkbox" name="authorities" th:each="role : ${allRoles}" th:text="${role.getRoleName()}" th:value="${role.getId()}"/>
+        </label>
+    </p>
     <input type="submit" value="Add User">
 </form>
 <br>
