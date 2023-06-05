@@ -2,10 +2,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Spring Security Example</title>
+    <style>
+        label {
+            font-family: 'Times New Roman', Times, serif; /* Гарнитура текста */
+            color: #216d6f;
+            font-size: 18pt; /* Размер шрифта в процентах */
+        }
+        span {
+            font-family: 'Times New Roman', Times, serif; /* Гарнитура текста */
+            color: blue;
+            font-size: 18pt; /* Размер шрифта в процентах */
+        }
+        p {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 11pt; /* Размер шрифта в пунктах */
+        }
+    </style>
 </head>
 <body>
 <h1>User, welcome spring boot security page!</h1>
+<br>
+<br>
+<div style="line-height:15pt;">
+    <label>Name: <span th:text="${user.getUsername()}"></span></label><br>
+    <label>Lastname: <span th:text="${user.getLastName()}"></span></label><br>
+    <label>Password: <span th:text="${user.getPassword()}"></span></label><br>
+    <label>Email: <span th:text="${user.getEmail()}"></span></label><br>
 
 
+</div>
+<br>
+<br>
+<a href="/logout">Logout</a>
 </body>
 </html>
