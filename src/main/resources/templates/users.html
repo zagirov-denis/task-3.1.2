@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link href='http://fonts.googleapis.com/css?family=Calibri'
+          rel='stylesheet' type='text/css' />
+    <style>
+        body {
+            font-family: 'Calibri', serif;
+            color: darkmagenta;
+            font-size: 18pt;
+        }
+    </style>
+</head>
+<body>
+<h1>HELLLOOOO</h1>
+<br>
+<br>
+<div style="line-height:25pt;">
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th> ID </th>
+            <th> Firstname </th>
+            <th> Lastname </th>
+            <th> Password </th>
+            <th> Email </th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td><span th:text="${user.getId()}"> ID </span></td>
+            <td><span th:text="${user.getUsername()}"> Firstname </span></td>
+            <td><span th:text="${user.getLastName()}"> Lastname </span></td>
+            <td><span th:text="${user.getPassword()}"> Lastname </span></td>
+            <td><span th:text="${user.getEmail()}"> Email </span></td>
+            <td><a th:href="@{/admin/edit/{id}(id=${user.id})}">Edit</a></td>
+            <td><a th:href="@{/admin/delete/{id}(id=${user.id})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<br>
+<p><a href="/admin/signup">Add a new user</a></p>
+<br>
+<br>
+<a href="/logout">Logout</a>
+</body>
+</html>
