@@ -1,12 +1,14 @@
 package ru.itmentor.spring.boot_security.demo.models;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 import java.util.*;
 
 @Entity
@@ -19,10 +21,14 @@ public class User implements UserDetails {
     private String username;
     @Column(name = "last_name")
     private String lastName;
-
+    @Min(value = 0, message = "Incorrect age")
+    @Column(name = "age")
+    private int age;
     @Column(name = "password")
+    @NotEmpty(message = "Password may not be empty")
     private String password;
     @Column(name = "email")
+    @NotEmpty(message = "Email may not be empty")
     private String email;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -30,7 +36,17 @@ public class User implements UserDetails {
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
+    @NotEmpty(message = "Choose at least one role")
     private Set<Role> roles = new HashSet<>();
+
+    public User(String username, String lastName, int age, String password, String email, Set<Role> roles) {
+        this.username = username;
+        this.lastName = lastName;
+        this.age = age;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -46,13 +62,6 @@ public class User implements UserDetails {
 
     public User() {}
 
-    public User(String username, String lastName, String password, String email, Set<Role> roles) {
-        this.username = username;
-        this.lastName = lastName;
-        this.password = password;
-        this.email = email;
-        this.roles = roles;
-    }
 
     public static UserDetails fromUser(User user) {
         return new org.springframework.security.core.userdetails.User(
@@ -72,7 +81,13 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    public int getAge() {
+        return age;
+    }
 
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public void setName(String name) {
         this.username = name;
