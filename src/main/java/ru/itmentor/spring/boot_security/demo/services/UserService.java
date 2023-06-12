@@ -1,5 +1,6 @@
 package ru.itmentor.spring.boot_security.demo.services;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +25,8 @@ public interface UserService extends UserDetailsService {
     User findByUsername(String username);
 
     Set<Role> getSetOfRoles(List<String> id);
+
+    User getUserByEmail(String email);
 
 
 }

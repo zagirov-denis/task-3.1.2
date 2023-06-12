@@ -24,6 +24,7 @@ public class UserController {
     public String showUser(Model model, Principal principal){
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
+        model.addAttribute("roles", user.getRoles());
         return "user";
     }
 }

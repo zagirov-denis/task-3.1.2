@@ -72,11 +72,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.getUserByUsername(username);
+    @Transactional(readOnly = true)
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.getUserByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException(
-                    "No user found with username: "+ username);
+                    "No user found with username: "+ email);
         }
         return User.fromUser(user);
     }
