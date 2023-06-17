@@ -30,7 +30,7 @@ public class User implements UserDetails {
     @Column(name = "email")
     @NotEmpty(message = "Email may not be empty")
     private String email;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
